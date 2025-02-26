@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form"; // Import react-hook-form
+import { useForm } from "react-hook-form";
 import { postExpense } from "../lib/postExpenses";
-
-const CATEGORIES = ["Groceries", "Leisure", "Electronics", "Utilities", "Clothing", "Health", "Other"];
+import { CATEGORIES } from "../lib/categories";
 
 export default function AddExpensePage() {
   const router = useRouter();

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, ArrowUp, ArrowDown } from "lucide-react";
+import { CATEGORIES } from "../lib/categories";
 
 interface Expense {
   id: number;
@@ -18,8 +19,6 @@ interface ExpenseTableProps {
   currentPage: number;
   totalPages: number;
 }
-
-const CATEGORIES = ["Groceries", "Leisure", "Electronics", "Utilities", "Clothing", "Health", "Other"];
 
 export const ExpenseTable = ({ expenses, currentPage, totalPages }: ExpenseTableProps) => {
   const [searchQuery, setSearchQuery] = useState("");
