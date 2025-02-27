@@ -22,9 +22,7 @@ export default async function Dashboard({ searchParams }: { searchParams: { page
     },
   });
 
-  console.log(authToken);
   if (!response.ok) {
-    console.log(response.status)
     throw new Error("Failed to fetch expenses");
   }
 

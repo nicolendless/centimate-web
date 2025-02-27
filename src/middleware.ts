@@ -1,10 +1,29 @@
+import { jwtDecode } from "jwt-decode";
 import { NextRequest, NextResponse } from "next/server";
+
+function isTokenExpired(token: string) {
+  try {
+    const decoded = jwtDecode(token)
+    const exp = decoded.exp
+
+    if (!exp) return true
+
+    const currentTime = Math.floor(Date.now() / 1000)
+    return exp < currentTime
+  } catch (error) {
+    return true;
+  }
+}
 
 export function middleware(request: NextRequest) {
   // TODO: create a authenticate method
   let cookie = request.cookies.get('authToken')
-
   if (!cookie) {
+    return NextResponse.redirect(new URL('/auth/login', request.url))
+  }
+
+  const token = cookie.value
+  if (isTokenExpired(token)) {
     return NextResponse.redirect(new URL('/auth/login', request.url))
   }
 
