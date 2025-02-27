@@ -3,7 +3,8 @@ import { ExpenseTable } from "@/app/components/ExpenseTable";
 import { getExpenses } from "@/app/lib/expenses";
 
 export default async function Dashboard({ searchParams }: { searchParams: { page?: string }}) {
-  const currentPage = Number(searchParams.page) || 1;
+  const params = await searchParams;
+  const currentPage = Number(params.page) || 1;
   const data = await getExpenses(currentPage);
   
   return (
