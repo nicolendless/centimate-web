@@ -13,6 +13,7 @@ export async function postExpense(expense: {
   amount: string;
   date: string;
 }) {
+
   const response = await fetch("http://localhost:8080/api/v1/expenses", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -21,7 +22,7 @@ export async function postExpense(expense: {
       amount: parseFloat(expense.amount),
       category: expense.category.toUpperCase(),
     }),
-  });
+  })
 
-  return response.ok;
+  return response.ok
 }
