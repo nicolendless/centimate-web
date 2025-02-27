@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ExpenseTable } from "@/app/components/ExpenseTable";
-import { getExpenses } from "@/app/lib/getExpenses";
+import { getExpenses } from "@/app/lib/expenses";
 
 export default async function Dashboard({ searchParams }: { searchParams: { page?: string }}) {
   const currentPage = Number(searchParams.page) || 1;

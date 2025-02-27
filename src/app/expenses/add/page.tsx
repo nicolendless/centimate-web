@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { postExpense } from "../../lib/postExpenses";
-import { CATEGORIES } from "../../lib/categories";
+import { postExpense } from "@/app/lib/expenses";
+import { CATEGORIES } from "@/app/lib/categories";
 
 export default function AddExpensePage() {
   const router = useRouter();
