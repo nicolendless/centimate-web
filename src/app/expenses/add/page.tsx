@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { postExpense } from "@/app/lib/expenses";
 import { CATEGORIES } from "@/app/lib/categories";
 
 export default function AddExpensePage() {
@@ -13,19 +12,23 @@ export default function AddExpensePage() {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (expenseData: any) => {
     setLoading(true);
     setMessage(null);
 
-    const success = await postExpense(data);
+    const response = await fetch('/api/expenses', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ expenseData })
+    });
 
     setLoading(false);
 
-    if (success) {
+    if (response.ok) {
       setMessage({ type: "success", text: "Expense added successfully!" });
       setTimeout(() => {
         router.push("/");
-      }, 1500);
+      }, 500);
     } else {
       setMessage({ type: "error", text: "Failed to add expense. Try again." });
     }
