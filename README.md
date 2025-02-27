@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**💸 Centimate Web💸**
+-----------------------------------------------------------------------
 
-## Getting Started
+This is a **frontend application** for an expense tracking system, built with **Next.js (App Router)**. It interacts with a **separate backend API** (hosted in another [repository](https://github.com/nicolendless/centimate)), allowing users to log and create expenses.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**Features**
+---------------
+
+- **User Authentication** -- Secure login via API authentication.
+- **Expense Management** -- View and create expenses via API.
+- **Protected Routes** -- Middleware restricts access to authenticated users.
+- **Pagination Support** -- Fetches expenses with paginated API calls.
+
+
+**Tech Stack**
+------------------
+
+-   **Frontend**: Next.js 15, React, TypeScript
+-   **Styling**: Tailwind CSS
+-   **Backend API**: REST API (External repository)
+-   **Authentication**: Cookie-based authentication (JWT stored in cookies)
+
+
+**Setup Instructions**
+-------------------------
+
+### 1. **Set Up the Backend API**
+
+> ⚠️ The backend API is required before running the frontend.\
+> Please clone and set up the backend from **the separate API repository**.
+
+```
+git clone git@github.com:nicolendless/centimate.git
+cd centimate
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️. **Set Up the Frontend**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+After setting up the API, clone and run the frontend:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+git clone git@github.com:nicolendless/centimate-web.git
+cd centimate-web
+npm install
+```
 
-## Learn More
+### 3️. **Configure Environment Variables**
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env.local` file and specify the backend API URL:
+```
+API_URL=http://localhost:8080/api/v1
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. **Run the Development Server**
+```
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Trade-offs & Future Improvements**
+-------------------------------------------------------
+❌ **Some error messages are not displayed in the UI** -- Instead, errors are thrown as exceptions, causing hard crashes in some cases.\
+✅ **Solution:** Replace `throw new Error()` with UI feedback messages.
 
-## Deploy on Vercel
+❌ **No Docker support yet** -- The project lacks containerization for deployment.\
+✅ **Solution:** Create a `Dockerfile` and `docker-compose.yml` for easier setup.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+❌ **Update & Delete are not implemented** -- The backend supports them, but the frontend doesn't.\
+✅ **Solution:** Add UI for editing and deleting expenses.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+❌ **No Sign-Up functionality** -- Only login is available.\
+✅ **Solution:** Implement a Sign-Up page.
+
+❌ **Dashboard should use a dedicated `ExpenseList` component** -- Currently, it fetches and renders expenses directly in `page.tsx`.\
+✅ **Solution:** Refactor dashboard to use an `ExpenseList` component for better modularity.
